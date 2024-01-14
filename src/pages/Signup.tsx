@@ -1,18 +1,17 @@
 import { SyntheticEvent, useState } from "react";
-
-// Icons
-import {FaEyeSlash, FaEye} from 'react-icons/fa'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export function Login(){
+export function Signup(){
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e:SyntheticEvent) => {
     e.preventDefault();
-    if (email.trim() === '' || password.trim() === '') {
+    if (email.trim() === '' || name.trim() === '' || password.trim() === '') {
       setErrorMessage('Por favor, preencha todos os campos.');
       return;
     }
@@ -22,16 +21,16 @@ export function Login(){
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-c_yellow50 p-10 rounded-md max-w-sm w-full">
         <div className="text-3xl font-extrabold text-start text-c_blue300">
-          Login
+          Cadastre-se
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div>
             <label 
               htmlFor="email" 
               className="block text-sm font-medium text-c_blue300"
             >
-              Email
+              E-mail
             </label>
             <input
               id="email"
@@ -40,6 +39,23 @@ export function Login(){
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="bg-transparent mt-1 p-2 w-full border border-c_blue300 rounded-md focus:outline-none focus:ring-2 focus:ring-c_blue700/20"
+            />
+          </div>
+          <div>
+            <label 
+              htmlFor="name" 
+              className="block text-sm font-medium text-c_blue300"
+            >
+              Nome
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autoComplete="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="bg-transparent mt-1 p-2 w-full border border-c_blue300 rounded-md focus:outline-none focus:ring-2 focus:ring-c_blue700/20"
             />
           </div>
@@ -75,11 +91,10 @@ export function Login(){
               type="submit"
               className="w-full py-2 px-4 border border-transparent rounded-md text-c_yellow50 bg-c_red700 hover:bg-c_redHover700 focus:outline-none"
             >
-              Entrar
+              Cadastrar-se
             </button>
-            <p className="text-sm mt-2 text-center text-c_blue300">Ainda não possui cadastro? Cadastre-se <span className="text-c_red700">
-              <Link
-                 to="/signup">
+            <p className="text-sm mt-2 text-center text-c_blue300">Já possui cadastro? Entre <span className="text-c_red700">
+              <Link to="/">
                 agora 
               </Link>
             </span></p>
