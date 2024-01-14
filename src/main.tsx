@@ -1,13 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import rotas from './rotas';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-const router = createBrowserRouter([...rotas]);
+import './index.css'
+
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />}
+        />
+        </Routes>
+      </Router>
   </React.StrictMode>,
 )
