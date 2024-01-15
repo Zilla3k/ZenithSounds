@@ -1,6 +1,7 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export function Signup(){
   const [email, setEmail] = useState('');
@@ -9,12 +10,15 @@ export function Signup(){
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const {signup} = useContext(AuthContext)
+
   const handleSubmit = async (e:SyntheticEvent) => {
     e.preventDefault();
     if (email.trim() === '' || name.trim() === '' || password.trim() === '') {
       setErrorMessage('Por favor, preencha todos os campos.');
       return;
     }
+    await signup(email, name, password)
   };
 
   return(
